@@ -14,6 +14,9 @@
 		940BFB2B1CF29FB3000BF56F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 940BFB2A1CF29FB3000BF56F /* Assets.xcassets */; };
 		940BFB2E1CF29FB3000BF56F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940BFB2C1CF29FB3000BF56F /* LaunchScreen.storyboard */; };
 		940BFB391CF29FB4000BF56F /* CJCalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 940BFB381CF29FB4000BF56F /* CJCalendarTests.m */; };
+		940BFB4C1CF2FF60000BF56F /* CJShowTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 940BFB4B1CF2FF60000BF56F /* CJShowTimeView.m */; };
+		94457EB91CF45ED9004E49BF /* CJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94457EB81CF45ED9004E49BF /* CJMainViewController.m */; };
+		94457EBC1CF460A4004E49BF /* CJYearTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94457EBB1CF460A4004E49BF /* CJYearTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		940BFB341CF29FB4000BF56F /* CJCalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CJCalendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940BFB381CF29FB4000BF56F /* CJCalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CJCalendarTests.m; sourceTree = "<group>"; };
 		940BFB3A1CF29FB4000BF56F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		940BFB4A1CF2FF60000BF56F /* CJShowTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJShowTimeView.h; sourceTree = "<group>"; };
+		940BFB4B1CF2FF60000BF56F /* CJShowTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJShowTimeView.m; sourceTree = "<group>"; };
+		94457EB71CF45ECE004E49BF /* CJMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CJMainViewController.h; sourceTree = "<group>"; };
+		94457EB81CF45ED9004E49BF /* CJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMainViewController.m; sourceTree = "<group>"; };
+		94457EBA1CF460A4004E49BF /* CJYearTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJYearTableView.h; sourceTree = "<group>"; };
+		94457EBB1CF460A4004E49BF /* CJYearTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJYearTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +90,7 @@
 		940BFB1D1CF29FB3000BF56F /* CJCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				940BFB431CF2EDF5000BF56F /* calendar */,
 				940BFB211CF29FB3000BF56F /* AppDelegate.h */,
 				940BFB221CF29FB3000BF56F /* AppDelegate.m */,
 				940BFB241CF29FB3000BF56F /* ViewController.h */,
@@ -109,6 +119,51 @@
 				940BFB3A1CF29FB4000BF56F /* Info.plist */,
 			);
 			path = CJCalendarTests;
+			sourceTree = "<group>";
+		};
+		940BFB431CF2EDF5000BF56F /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				940BFB441CF2EDF5000BF56F /* controller */,
+				940BFB451CF2EDF5000BF56F /* model */,
+				940BFB461CF2EDF5000BF56F /* view */,
+			);
+			path = calendar;
+			sourceTree = "<group>";
+		};
+		940BFB441CF2EDF5000BF56F /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				94457EB71CF45ECE004E49BF /* CJMainViewController.h */,
+				94457EB81CF45ED9004E49BF /* CJMainViewController.m */,
+				94457EB61CF45E00004E49BF /* subController */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		940BFB451CF2EDF5000BF56F /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		940BFB461CF2EDF5000BF56F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				940BFB4A1CF2FF60000BF56F /* CJShowTimeView.h */,
+				940BFB4B1CF2FF60000BF56F /* CJShowTimeView.m */,
+				94457EBA1CF460A4004E49BF /* CJYearTableView.h */,
+				94457EBB1CF460A4004E49BF /* CJYearTableView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		94457EB61CF45E00004E49BF /* subController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = subController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +210,7 @@
 		940BFB131CF29FB3000BF56F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CJ;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = chjsun;
 				TargetAttributes = {
@@ -213,7 +269,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94457EB91CF45ED9004E49BF /* CJMainViewController.m in Sources */,
 				940BFB261CF29FB3000BF56F /* ViewController.m in Sources */,
+				940BFB4C1CF2FF60000BF56F /* CJShowTimeView.m in Sources */,
+				94457EBC1CF460A4004E49BF /* CJYearTableView.m in Sources */,
 				940BFB231CF29FB3000BF56F /* AppDelegate.m in Sources */,
 				940BFB201CF29FB3000BF56F /* main.m in Sources */,
 			);
@@ -402,6 +461,7 @@
 				940BFB3F1CF29FB4000BF56F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		940BFB401CF29FB4000BF56F /* Build configuration list for PBXNativeTarget "CJCalendarTests" */ = {
 			isa = XCConfigurationList;
@@ -410,6 +470,7 @@
 				940BFB421CF29FB4000BF56F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
