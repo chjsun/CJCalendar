@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CJMainViewController : UIViewController
+@interface CJCalendarViewController : UIViewController
 
 @end

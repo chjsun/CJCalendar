@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import "CJMainViewController.h"
+#import "CJCalendarViewController.h"
 
 @interface ViewController ()
 
@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    CJMainViewController *mainC = [[CJMainViewController alloc] init];
+    CJCalendarViewController *mainC = [[CJCalendarViewController alloc] init];
     [self addChildViewController:mainC];
     [self.view addSubview:mainC.view];
     

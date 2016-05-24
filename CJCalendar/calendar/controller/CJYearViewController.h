@@ -1,5 +1,5 @@
 //
-//  CJYearTableView.h
+//  CJYearViewController.h
 //  CJCalendar
 //
 //  Created by chjsun on 16/5/24.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CJYearTableView : UITableView
+@interface CJYearViewController : UITableViewController
 
 @end

@@ -129,10 +129,10 @@
     if (self = [super initWithFrame:frame]) {
         //set default attr
         self.headerName = @"己酉鸡年 冬月廿四 星期一";
-        self.headerBackgroundColor = CJColor(45, 59, 164);
+        self.headerBackgroundColor = CJColor(60, 45, 140);
         self.headerColor = [UIColor whiteColor];
         
-        self.contentBackgroundColor = CJColor(34, 42, 139);
+        self.contentBackgroundColor = CJColor(71, 55, 169);
         self.contentColor = [UIColor whiteColor];
         self.dayText = @"19";
         self.monthText = @"1月";
@@ -146,11 +146,12 @@
 
 -(void) generateView{
     //set header
-    CGRect headerRect = CGRectMake(0, 0, self.bounds.size.width, 44);
+    CGRect headerRect = CGRectMake(0, 0, self.bounds.size.width, 22);
     [self generateHeaderView:headerRect];
     
-    CGFloat contentHeight = self.bounds.size.height - 44;
-    CGRect contentRect = CGRectMake(0, 44, self.bounds.size.width, contentHeight);
+    //set content
+    CGFloat contentHeight = self.bounds.size.height - 22;
+    CGRect contentRect = CGRectMake(0, 22, self.bounds.size.width, contentHeight);
     [self generateContentView:contentRect];
 }
 
@@ -167,6 +168,8 @@
     [self.headerView addSubview:self.titleLabel];
     self.titleLabel.text = self.headerName;
     self.titleLabel.textColor = self.headerColor;
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:rect.size.height * CJBasicFontToHeight-4];
+//    self.titleLabel.font = [UIFont fontWithName:@ "Arial Rounded MT Bold"  size:(rect.size.height * CJBasicFontToHeight)];
 
     [self.titleLabel sizeToFit];
     self.titleLabel.center = self.headerView.center;
