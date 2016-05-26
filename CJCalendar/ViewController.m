@@ -12,7 +12,8 @@
 
 @interface ViewController ()
 
-
+/** controller */
+@property (nonatomic, strong) CJCalendarViewController *calendarController;
 
 @end
 
@@ -22,38 +23,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    CJCalendarViewController *mainC = [[CJCalendarViewController alloc] init];
-    [self addChildViewController:mainC];
-    [self.view addSubview:mainC.view];
+    self.calendarController = [[CJCalendarViewController alloc] init];
+    self.calendarController.view.frame = self.view.frame;
+
     
 //    [self test];
     
 }
 
 
--(void) test{
+- (IBAction)btnClick:(id)sender {
     
-    for (int i = 1; i<120; i++) {
-        CGSize size = [self heightForString:@"1月" fontSize:i];
-        NSLog(@"-------------------");
-        NSLog(@"%f", size.height);
-        NSLog(@"%i", i);
-        NSLog(@"===================");
-        NSLog(@"");
-    }
-
-
-}
-
-- (CGSize) heightForString:(NSString *)value fontSize:(float)fontSize
-{
-    CGSize size =[value sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]}];
-    return size;
-}
-
-
--(void) btnClick{
-
+    [self presentViewController:self.calendarController animated:YES completion:nil];
 }
 
 

@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol YearViewControllerDelegate <NSObject>
+
+@optional
+-(void)yearTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath cellText:(NSString *)cellText;
+
+@end
+
 @interface CJYearViewController : UITableViewController
+
+/** 选中状态的color */
+@property (nonatomic, copy) UIColor *selectColor;
+
+-(void) refreshControlWithCellText: (NSString *)year;
+
+/** 代理 */
+@property (nonatomic, assign) id<YearViewControllerDelegate> delegate;
 
 @end

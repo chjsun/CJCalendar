@@ -10,89 +10,110 @@
 
 @interface CJYearViewController ()
 
+/** indexPaht */
+@property (nonatomic, assign) NSIndexPath *selectIndexPath;
+
 @end
 
+static NSString * const reuseIdentifier = @"yearTableViewCell";
 @implementation CJYearViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //注册
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //
+//    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return 2101-1970;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+        
+        CGRect rect = self.view.frame;
+        
+        CGFloat height = rect.size.height/4;
+        CGFloat width = height;
+        CGFloat x = (rect.size.width - height)/2;
+        CGFloat y = 0;
+        
+        UIView *selectView = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+        
+        selectView.backgroundColor = self.selectColor;
+        selectView.layer.cornerRadius = height/2;
+        selectView.layer.masksToBounds = YES;
+        
+        UIView *selectBgView = [[UIView alloc] initWithFrame:cell.frame];
+        [selectBgView addSubview:selectView];
+        
+        cell.selectedBackgroundView = selectBgView;
+    }
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1970];
+    cell.textLabel.font = [UIFont systemFontOfSize:22];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.view.frame.size.height/4;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.selectIndexPath  = indexPath;
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+
+    if ([self.delegate respondsToSelector:@selector(yearTableView:didSelectRowAtIndexPath:cellText:)]) {
+
+        [self.delegate yearTableView:tableView didSelectRowAtIndexPath:indexPath cellText:cell.textLabel.text];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+
+-(void)refreshControlWithCellText:(NSString *)year{
+    NSUInteger row = [year integerValue] - 1970;
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:CGPointMake(10, row * self.view.frame.size.height/4+1)];
+//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
+    
+
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+
+
+-(UIRefreshControl *)refreshControl{
+    
+    [self.tableView selectRowAtIndexPath:self.selectIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
+    return [super refreshControl];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

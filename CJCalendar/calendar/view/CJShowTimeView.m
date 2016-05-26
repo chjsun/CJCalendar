@@ -134,9 +134,9 @@
         
         self.contentBackgroundColor = CJColor(71, 55, 169);
         self.contentColor = [UIColor whiteColor];
-        self.dayText = @"19";
+        self.dayText = @"01";
         self.monthText = @"1月";
-        self.yearText = @"1970";
+        self.yearText = @"2016";
         
         self.basicColor = CJColor(220, 220, 220);
 
