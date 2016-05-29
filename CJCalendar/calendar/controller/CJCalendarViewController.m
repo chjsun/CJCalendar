@@ -39,7 +39,7 @@
  
  */
 
-@interface CJCalendarViewController ()<ShowTimeViewDelegate, YearViewControllerDelegate, DecisionDelegate, SelectTimeScrollViewDelegate>
+@interface CJCalendarViewController ()<ShowTimeViewDelegate, DecisionDelegate, SelectTimeScrollViewDelegate>
 
 /** 记录高度 */
 @property (nonatomic, assign) CGFloat viewHeight;
@@ -169,8 +169,8 @@
 
 #pragma mark - showViewDelegate 具体日历上方的时间显示区代理
 // 头部 月 日 -- 代理
--(void)ShowTimeView:(CJShowTimeView *)timeView didSelectMonth:(NSString *)month day:(NSString *)day{
-    NSLog(@"%@, %@", month , day);
+-(void)ShowTimeView:(CJShowTimeView *)timeView didSelectYear:(NSString *)year Month:(NSString *)month day:(NSString *)day{
+    [self.selectScrollView refreshControlWithYear:year month:month day:day];
     [self setBoundsToScrollView:0];
 }
 // 头部 年 -- 代理
@@ -187,6 +187,24 @@
     self.selectScrollView.bounds = CGRectMake(selectWidth * tag, 0, selectWidth, selectHeight);
 
 }
+#pragma mark - 选择日历面板控制器的代理
+// 年份选择
+-(void)selectTimeView:(CJSelectTimeScrollView *)timeScroll didSelectYearAtIndexPath:(NSIndexPath *)indexPath cellText:(NSString *)cellText{
+    self.timeView.yearText = cellText;
+}
+
+// 月份选择
+-(void)selectTimeView:(CJSelectTimeScrollView *)timeScroll didSelectMonthAndDayAtIndexPath:(NSIndexPath *)indexPath GregoiainCalendar:(NSString *)gregoiainCalendar chineseCalendar:(NSString *)chineseCalendar{
+    
+    NSArray *calendar = [gregoiainCalendar componentsSeparatedByString:@"-"];
+    
+    self.timeView.headerName = chineseCalendar;
+    self.timeView.monthText = calendar[1];
+    self.timeView.dayText = calendar[2];
+    self.timeView.yearText = calendar[0];
+
+}
+
 
 #pragma mark - 控制板按钮
 // 确定

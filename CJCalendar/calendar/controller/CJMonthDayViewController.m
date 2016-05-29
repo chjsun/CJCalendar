@@ -24,8 +24,6 @@
 
 /** 处理时间的方法 */
 @property (nonatomic, strong) CJUseTime *useTime;
-/** 设置日期被选中的背景view */
-@property (nonatomic, strong) UIView *selectView;
 
 @end
 
@@ -42,36 +40,14 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
     return _useTime;
 }
 
-
-//懒加载
--(UIView *)selectView{
-    if (_selectView) {
-        CGRect rect = self.view.frame;
-//        CGFloat wh = self.view.frame.size.width/7;
-        CGFloat height = rect.size.height/4;
-        CGFloat width = height;
-        CGFloat x = (rect.size.width - height)/2;
-        CGFloat y = 0;
-        UIView *selectBgView = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-        
-        selectBgView.backgroundColor = self.selectColor;
-        selectBgView.layer.cornerRadius = height/2;
-        selectBgView.layer.masksToBounds = YES;
-
-        [_selectView addSubview:selectBgView];
-    }
-    return _selectView;
-}
-
-
 -(instancetype)initWithFrame:(CGRect)frame{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
     CGFloat wh = frame.size.width/7;
-    layout.itemSize = CGSizeMake(wh, wh-5);
+    layout.itemSize = CGSizeMake(wh, wh);
     layout.minimumLineSpacing = 5;
     layout.minimumInteritemSpacing = -2;
-    layout.sectionInset = UIEdgeInsetsMake(0, 0, 10, 0);
+    layout.sectionInset = UIEdgeInsetsMake(10, 0, 15, 0);
 
 
     self = [super initWithCollectionViewLayout:layout];
@@ -141,11 +117,25 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         //日期属性
         cell.gregoiainCalendar = dateStr;
         cell.chineseCalendar = [self.useTime timeChineseCalendarWithDate:dateStr];
+        
+        //设置选中后
+        if (cell.selectedBackgroundView == nil) {
+            CGRect rect = self.view.frame;
+            CGFloat wh = rect.size.width/7;
+            
+            UIView *selectBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, wh, wh)];
+            
+            selectBgView.backgroundColor = self.selectColor;
+            selectBgView.layer.cornerRadius = wh/2;
+            selectBgView.layer.masksToBounds = YES;
+            
+            UIView *selectView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, wh, wh)];
+            
+            [selectView addSubview:selectBgView];
+            cell.selectedBackgroundView = selectView;
+        }
 
     }
-
-    cell.backgroundView = self.selectView;
-    
     return cell;
 }
 
@@ -157,28 +147,36 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:reuseHeader forIndexPath:indexPath];
         
-        for (UIView *subView in headerView.subviews) {
-            if (subView.tag == 11) {
-                [subView removeFromSuperview];
+        UILabel *label = [headerView viewWithTag:11];
+        if (label == nil) {
+            // 添加日期
+            label = [[UILabel alloc] init];
+            label.tag = 11;
+            [headerView addSubview:label];
+            
+            NSArray *weeks = @[@"日", @"一", @"二", @"三", @"四", @"五", @"六"];
+            //添加星期
+            for (int i = 0; i < 7; i++) {
+                NSString *weekStr = weeks[i];
+                UILabel *week = [[UILabel alloc] initWithFrame:CGRectMake( headerView.frame.size.width/7 * i, headerView.frame.size.height/2, headerView.frame.size.width/7, 22)];
+                week.font = [UIFont systemFontOfSize:15];
+                week.text = weekStr;
+                week.textAlignment = NSTextAlignmentCenter;
+                [headerView addSubview:week];
             }
+            
         }
+        //设置属性
+        label.text = [NSString stringWithFormat:@"%ld年 %ld月", indexPath.section/12 + 1970, indexPath.section%12 + 1];
+            
+        [label sizeToFit];
         
-        UILabel *yearAndMonthLabel = [[UILabel alloc] init];
-        yearAndMonthLabel.tag = 11;
+        CGFloat x = (headerView.frame.size.width - label.frame.size.width)/2;
+        CGFloat y = (headerView.frame.size.height/2 - label.frame.size.height)/2;
+        CGFloat width = label.frame.size.width;
+        CGFloat height = label.frame.size.height;
+        label.frame = CGRectMake(x, y, width, height);
         
-        yearAndMonthLabel.text = [NSString stringWithFormat:@"%ld年 %ld月", indexPath.section/12 + 1970, indexPath.section%12 + 1];
-        
-        [yearAndMonthLabel sizeToFit];
-        
-        CGFloat x = (headerView.frame.size.width - yearAndMonthLabel.frame.size.width)/2;
-        CGFloat y = (headerView.frame.size.height - yearAndMonthLabel.frame.size.height)/2;
-        CGFloat width = yearAndMonthLabel.frame.size.width;
-        CGFloat height = yearAndMonthLabel.frame.size.height;
-        
-        yearAndMonthLabel.frame = CGRectMake(x, y, width, height);
-        
-        [headerView addSubview:yearAndMonthLabel];
-
         return headerView;
     }
     return nil;
@@ -194,16 +192,31 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     CGFloat ScreenWidth = [UIScreen mainScreen].bounds.size.width;
-    return (CGSize){ScreenWidth, 33};
+    return (CGSize){ScreenWidth, 44};
 }
 
 //cell点击
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     CJMonthDayCollectionCell *cell = (CJMonthDayCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    NSLog(@"%@", cell.gregoiainCalendar);
-    NSLog(@"%@", cell.chineseCalendar);
+    if ([self.delegate respondsToSelector:@selector(monthAndDayController:didSelectIndexPath: GregoiainCalendar:chineseCalendar:)]){
+        
+        [self.delegate monthAndDayController:self didSelectIndexPath:indexPath GregoiainCalendar:cell.gregoiainCalendar chineseCalendar:cell.chineseCalendar];
+    }
 }
 
 
+-(void)refreshControlWithYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
+    //每个月的第一天
+    NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+    // 获得这个月第一天是星期几
+    NSInteger dayOfFirstWeek = [self.useTime timeMonthWeekDayOfFirstDay:dateStr];
+    
+    NSInteger section = [year integerValue] - 1971 + [month integerValue];
+    NSInteger item = [day integerValue] + dayOfFirstWeek - 1;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
+    
+    [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+}
 @end

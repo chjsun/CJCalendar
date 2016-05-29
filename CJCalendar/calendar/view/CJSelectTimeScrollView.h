@@ -14,7 +14,7 @@
 @optional
 -(void) selectTimeView:(CJSelectTimeScrollView *)timeScroll didSelectYearAtIndexPath:(NSIndexPath *)indexPath cellText:(NSString *)cellText;
 
--(void) selectTimeView:(CJSelectTimeScrollView *)timeScroll didSelectMonthAndDayAtIndexPath:(NSIndexPath *)indexPath cellText:(NSString *)cellText;
+-(void) selectTimeView:(CJSelectTimeScrollView *)timeScroll didSelectMonthAndDayAtIndexPath:(NSIndexPath *)indexPath GregoiainCalendar:(NSString *)gregoiainCalendar chineseCalendar:(NSString *)chineseCalendar;
 
 @end
 
@@ -29,7 +29,11 @@
 @property (nonatomic, copy) NSString *day;
 
 // methed
+// 设置所有的控制器
 -(void) setUpAllControllerWithSuperControll:(UIViewController *)controller;
+//根据时间更新collection
+-(void)refreshControlWithYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
+
 
 /** 代理 */
 @property (nonatomic, assign) id<SelectTimeScrollViewDelegate> delegates;

@@ -134,8 +134,8 @@
         
         self.contentBackgroundColor = CJColor(71, 55, 169);
         self.contentColor = [UIColor whiteColor];
-        self.dayText = @"01";
-        self.monthText = @"1月";
+        self.dayText = @"05";
+        self.monthText = @"8";
         self.yearText = @"2016";
         
         self.basicColor = CJColor(220, 220, 220);
@@ -207,13 +207,17 @@
     //set month
     [self.monthAndDayView addSubview:self.animMonthLabel];
     
-    self.animMonthLabel.text = self.monthText;
     self.animMonthLabel.textColor = self.contentColor;
 
     self.animMonthLabel.font = [UIFont systemFontOfSize:smallestUnitHeight * CJBasicFontToHeight];
     
     [self.animMonthLabel sizeToFit];
-    self.animMonthLabel.center = CGPointMake(rect.size.width/2, smallestUnitHeight / 2);
+    //设置宽度与控件等宽
+    CGRect monthLabelRect = CGRectMake(self.animMonthLabel.frame.origin.x, 0, rect.size.width, self.animMonthLabel.frame.size.height);
+    self.animMonthLabel.frame = monthLabelRect;
+    //
+    
+    self.animMonthLabel.textAlignment = NSTextAlignmentCenter;
     
     //set day
     [self.monthAndDayView addSubview:self.animDayLabel];
@@ -222,7 +226,14 @@
     self.animDayLabel.textColor = self.contentColor;
     self.animDayLabel.font = [UIFont systemFontOfSize:smallestUnitHeight * 2];
     [self.animDayLabel sizeToFit];
-    self.animDayLabel.center = CGPointMake(rect.size.width/2, smallestUnitHeight * 2);
+    
+    //设置宽度与控件等宽
+
+    CGRect dayLabelRect = CGRectMake(self.animDayLabel.frame.origin.x, CGRectGetMaxY(self.animMonthLabel.frame) , rect.size.width, self.animDayLabel.frame.size.height);
+    self.animDayLabel.frame = dayLabelRect;
+    //
+    self.animDayLabel.textAlignment = NSTextAlignmentCenter;
+    
     [self.monthAndDayView addSubview:self.animDayLabel];
     
     [self addSubview:self.monthAndDayView];
@@ -235,10 +246,9 @@
 
 -(void)monthAndDayTap{
     //代理传值
-    if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectMonth:day:)]) {
-        [_delegate ShowTimeView:self didSelectMonth:_animMonthLabel.text day:_animDayLabel.text];
+    if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectYear:Month:day:)]) {
+        [_delegate ShowTimeView:self didSelectYear:_yearText Month:_monthText day:_dayText];
     }
-
     [UIView animateWithDuration:0.25 animations:^{
         //动画变小
         _animMonthLabel.transform = CGAffineTransformMakeScale(0.8, 0.8);
@@ -277,8 +287,6 @@
     self.yearView.backgroundColor = self.contentBackgroundColor;
     
     [self.yearView addSubview:self.animYearLabel];
-    //记录label 方便做动画
-    self.animYearLabel = self.animYearLabel;
     //初始化透明度
     self.animYearLabel.alpha = CJSelectAlpha;
     
@@ -287,7 +295,11 @@
     self.animYearLabel.font = [UIFont systemFontOfSize:smallestUnitHeight * CJBasicFontToHeight];
     
     [self.animYearLabel sizeToFit];
-    self.animYearLabel.center = CGPointMake(rect.size.width/2, smallestUnitHeight / 2);
+    //设置宽度与控件等宽
+    CGRect yearLabelRect = CGRectMake(self.animYearLabel.frame.origin.x, 0, rect.size.width, self.animYearLabel.frame.size.height);
+    self.animYearLabel.frame = yearLabelRect;
+    //
+    self.animYearLabel.textAlignment = NSTextAlignmentCenter;
     
     [self addSubview:self.yearView];
     
@@ -300,7 +312,7 @@
 -(void)yearTap{
     //代理传值
     if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectYear:)]) {
-        [_delegate ShowTimeView:self didSelectYear:_animYearLabel.text];
+        [_delegate ShowTimeView:self didSelectYear:_yearText];
     }
     [UIView animateWithDuration:0.25 animations:^{
         // 动画变小
@@ -321,5 +333,26 @@
     }];
 }
 
+
+-(void)setYearText:(NSString *)yearText{
+    _yearText = yearText;
+    self.animYearLabel.text = yearText;
+    [self setNeedsDisplay];
+}
+
+-(void)setDayText:(NSString *)dayText{
+    _dayText = dayText;
+    self.animDayLabel.text = [NSString stringWithFormat:@"%.2ld", [dayText integerValue]];
+}
+
+-(void)setMonthText:(NSString *)monthText{
+    _monthText = monthText;
+    self.animMonthLabel.text = [NSString stringWithFormat:@"%@月", monthText];
+}
+
+-(void)setHeaderName:(NSString *)headerName{
+    _headerName = headerName;
+    self.titleLabel.text = headerName;
+}
 
 @end

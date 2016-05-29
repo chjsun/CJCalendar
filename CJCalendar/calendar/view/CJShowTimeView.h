@@ -13,7 +13,7 @@
 
 @optional
 //点击月日的时候调用
--(void)ShowTimeView:(CJShowTimeView *)timeView didSelectMonth:(NSString *)month day:(NSString *)day;
+-(void)ShowTimeView:(CJShowTimeView *)timeView didSelectYear:(NSString *)year Month:(NSString *)month day:(NSString *)day;
 
 //点击年的时候调用
 -(void)ShowTimeView:(CJShowTimeView *)timeView didSelectYear:(NSString *)year;

@@ -8,11 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+@class CJMonthDayViewController;
+@protocol MonthAndDayControllerDelegate <NSObject>
+
+@optional
+-(void) monthAndDayController:(CJMonthDayViewController *)controller didSelectIndexPath:(NSIndexPath *)indexPath GregoiainCalendar:(NSString *)gregoiainCalendar chineseCalendar:(NSString *)chineseCalendar;
+
+@end
+
 @interface CJMonthDayViewController : UICollectionViewController
 
 /** 选中状态的color */
 @property (nonatomic, copy) UIColor *selectColor;
 
 -(instancetype)initWithFrame:(CGRect)frame;
+
+/** 代理 */
+@property (nonatomic, assign) id<MonthAndDayControllerDelegate> delegate;
+
+//根据时间更新collection
+-(void)refreshControlWithYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
 
 @end
