@@ -10,6 +10,9 @@
 
 @interface CJMonthDayViewController : UICollectionViewController
 
+/** 选中状态的color */
+@property (nonatomic, copy) UIColor *selectColor;
+
 -(instancetype)initWithFrame:(CGRect)frame;
 
 @end

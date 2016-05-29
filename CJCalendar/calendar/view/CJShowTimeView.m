@@ -234,6 +234,11 @@
 }
 
 -(void)monthAndDayTap{
+    //代理传值
+    if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectMonth:day:)]) {
+        [_delegate ShowTimeView:self didSelectMonth:_animMonthLabel.text day:_animDayLabel.text];
+    }
+
     [UIView animateWithDuration:0.25 animations:^{
         //动画变小
         _animMonthLabel.transform = CGAffineTransformMakeScale(0.8, 0.8);
@@ -250,10 +255,6 @@
             _animMonthLabel.transform = CGAffineTransformIdentity;
             _animDayLabel.transform = CGAffineTransformIdentity;
             
-            //代理传值
-            if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectMonth:day:)]) {
-                [_delegate ShowTimeView:self didSelectMonth:_animMonthLabel.text day:_animDayLabel.text];
-            }
         } completion:nil];
     }];
     
@@ -297,6 +298,10 @@
 }
 
 -(void)yearTap{
+    //代理传值
+    if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectYear:)]) {
+        [_delegate ShowTimeView:self didSelectYear:_animYearLabel.text];
+    }
     [UIView animateWithDuration:0.25 animations:^{
         // 动画变小
         _animYearLabel.transform = CGAffineTransformMakeScale(0.8, 0.8);
@@ -312,10 +317,6 @@
         [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             _animYearLabel.transform = CGAffineTransformIdentity;
 
-            //代理传值
-            if ([_delegate respondsToSelector:@selector(ShowTimeView:didSelectYear:)]) {
-                [_delegate ShowTimeView:self didSelectYear:_animYearLabel.text];
-            }
         } completion:nil];
     }];
 }

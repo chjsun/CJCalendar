@@ -24,6 +24,8 @@
 
 /** 处理时间的方法 */
 @property (nonatomic, strong) CJUseTime *useTime;
+/** 设置日期被选中的背景view */
+@property (nonatomic, strong) UIView *selectView;
 
 @end
 
@@ -32,12 +34,35 @@
 static NSString * const reuseIdentifier = @"monthDayViewCell";
 static NSString * const reuseHeader = @"monthDayViewHeader";
 
+// 懒加载
 -(CJUseTime *)useTime{
     if (!_useTime) {
         _useTime = [[CJUseTime alloc] init];
     }
     return _useTime;
 }
+
+
+//懒加载
+-(UIView *)selectView{
+    if (_selectView) {
+        CGRect rect = self.view.frame;
+//        CGFloat wh = self.view.frame.size.width/7;
+        CGFloat height = rect.size.height/4;
+        CGFloat width = height;
+        CGFloat x = (rect.size.width - height)/2;
+        CGFloat y = 0;
+        UIView *selectBgView = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+        
+        selectBgView.backgroundColor = self.selectColor;
+        selectBgView.layer.cornerRadius = height/2;
+        selectBgView.layer.masksToBounds = YES;
+
+        [_selectView addSubview:selectBgView];
+    }
+    return _selectView;
+}
+
 
 -(instancetype)initWithFrame:(CGRect)frame{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -73,7 +98,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 
-    return (2101-2000) * 12;
+    return (2101-1970) * 12;
 }
 
 
@@ -92,13 +117,12 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
     
     
     //每个月的第一天
-    NSString *dateStr = [self getDateStrForSection:indexPath.section day:0];
+    NSString *dateStr = [self getDateStrForSection:indexPath.section day:1];
     // 获得这个月的天数
     self.monthNumber = [self.useTime timeNumberOfDaysInString:dateStr];
     
     // 获得这个月第一天是星期几
     self.dayOfWeek = [self.useTime timeMonthWeekDayOfFirstDay:dateStr];
-
     
     NSInteger firstCorner = self.dayOfWeek;
     NSInteger lastConter = self.dayOfWeek + self.monthNumber - 1;
@@ -114,10 +138,13 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         NSString *dateStr = [self getDateStrForSection:indexPath.section day:gregoiain];
         cell.lunarDay = [self.useTime timeChineseDaysWithDate:dateStr];
         
+        //日期属性
         cell.gregoiainCalendar = dateStr;
         cell.chineseCalendar = [self.useTime timeChineseCalendarWithDate:dateStr];
 
     }
+
+    cell.backgroundView = self.selectView;
     
     return cell;
 }
@@ -135,7 +162,6 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
                 [subView removeFromSuperview];
             }
         }
-
         
         UILabel *yearAndMonthLabel = [[UILabel alloc] init];
         yearAndMonthLabel.tag = 11;
@@ -151,10 +177,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         
         yearAndMonthLabel.frame = CGRectMake(x, y, width, height);
         
-        
         [headerView addSubview:yearAndMonthLabel];
-        
-//        headerView.backgroundColor = [UIColor blueColor];
 
         return headerView;
     }
@@ -163,11 +186,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 }
 
 -(NSString *)getDateStrForSection:(NSInteger)section day:(NSInteger)day{
-    if (day) {
-        return [NSString stringWithFormat:@"%ld-%ld-%ld", section/12 + 1970, section%12 + 1, day];
-    }else{
-        return [NSString stringWithFormat:@"%ld-%ld-%i", section/12 + 1970, section%12 + 1, 1];
-    }
+    return [NSString stringWithFormat:@"%ld-%ld-%ld", section/12 + 1970, section%12 + 1, day];
 }
 
 
@@ -181,8 +200,6 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 //cell点击
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     CJMonthDayCollectionCell *cell = (CJMonthDayCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
- 
-    
     
     NSLog(@"%@", cell.gregoiainCalendar);
     NSLog(@"%@", cell.chineseCalendar);

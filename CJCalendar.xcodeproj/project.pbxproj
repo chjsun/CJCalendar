@@ -11,6 +11,7 @@
 		940A5C331CF6958300D72C35 /* CJUseTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 940A5C321CF6958300D72C35 /* CJUseTime.m */; };
 		940A5C371CF6EC7E00D72C35 /* CJMonthDayCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 940A5C351CF6EC7E00D72C35 /* CJMonthDayCollectionCell.m */; };
 		940A5C381CF6EC7E00D72C35 /* CJMonthDayCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940A5C361CF6EC7E00D72C35 /* CJMonthDayCollectionCell.xib */; };
+		940A5C721CFAC3CD00D72C35 /* CJSelectTimeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 940A5C711CFAC3CD00D72C35 /* CJSelectTimeScrollView.m */; };
 		940BFB201CF29FB3000BF56F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 940BFB1F1CF29FB3000BF56F /* main.m */; };
 		940BFB231CF29FB3000BF56F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 940BFB221CF29FB3000BF56F /* AppDelegate.m */; };
 		940BFB261CF29FB3000BF56F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940BFB251CF29FB3000BF56F /* ViewController.m */; };
@@ -42,6 +43,8 @@
 		940A5C341CF6EC7E00D72C35 /* CJMonthDayCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMonthDayCollectionCell.h; sourceTree = "<group>"; };
 		940A5C351CF6EC7E00D72C35 /* CJMonthDayCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMonthDayCollectionCell.m; sourceTree = "<group>"; };
 		940A5C361CF6EC7E00D72C35 /* CJMonthDayCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJMonthDayCollectionCell.xib; sourceTree = "<group>"; };
+		940A5C701CFAC3CD00D72C35 /* CJSelectTimeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSelectTimeScrollView.h; sourceTree = "<group>"; };
+		940A5C711CFAC3CD00D72C35 /* CJSelectTimeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSelectTimeScrollView.m; sourceTree = "<group>"; };
 		940BFB1B1CF29FB3000BF56F /* CJCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CJCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		940BFB1F1CF29FB3000BF56F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		940BFB211CF29FB3000BF56F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 			children = (
 				940BFB4A1CF2FF60000BF56F /* CJShowTimeView.h */,
 				940BFB4B1CF2FF60000BF56F /* CJShowTimeView.m */,
+				940A5C701CFAC3CD00D72C35 /* CJSelectTimeScrollView.h */,
+				940A5C711CFAC3CD00D72C35 /* CJSelectTimeScrollView.m */,
 				940A5C2D1CF5FE5C00D72C35 /* CJDecisionView.h */,
 				940A5C2E1CF5FE5C00D72C35 /* CJDecisionView.m */,
 				940A5C341CF6EC7E00D72C35 /* CJMonthDayCollectionCell.h */,
@@ -301,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				940A5C721CFAC3CD00D72C35 /* CJSelectTimeScrollView.m in Sources */,
 				940A5C331CF6958300D72C35 /* CJUseTime.m in Sources */,
 				94457EB91CF45ED9004E49BF /* CJCalendarViewController.m in Sources */,
 				940A5C2F1CF5FE5C00D72C35 /* CJDecisionView.m in Sources */,

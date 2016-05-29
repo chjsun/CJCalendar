@@ -99,21 +99,7 @@ static NSString * const reuseIdentifier = @"yearTableViewCell";
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:CGPointMake(10, row * self.view.frame.size.height/4+1)];
 //    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
-
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    
-    
-
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 }
-
-
-
--(UIRefreshControl *)refreshControl{
-    
-    [self.tableView selectRowAtIndexPath:self.selectIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    
-    return [super refreshControl];
-}
-
 
 @end

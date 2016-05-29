@@ -47,6 +47,8 @@
 -(NSDateFormatter *)formatter{
     if (!_formatter) {
         _formatter = [[NSDateFormatter alloc] init];
+        [_formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        [_formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     }
     return _formatter;
 }
@@ -97,10 +99,10 @@
 -(void)test{
 //    NSDate * currentDate = [NSDate date];
     
-    NSString * dateStr = @"1970-5-1";
+    NSString * dateStr = @"1986-5-5";
     NSDate *date = [self strToDate:dateStr];
 //    [self timeFewWeekInMonth:dateStr];
-    [self getChineseCalendarWithDate:date];
+    [self getChineseWeekDaysWithDate:date];
     
 }
 
@@ -148,7 +150,7 @@
 {
     [self.formatter setDateFormat:@"yyyy-MM-dd"]; // 年-月-日 时:分:秒
     // 这个格式可以随便定义,比如：@"yyyy,MM,dd,HH,mm,ss"
-    NSDate * date = [self.formatter dateFromString:dateStr];
+    NSDate *date = [self.formatter dateFromString:dateStr];
     return date;
 }
 
@@ -200,6 +202,7 @@
 - (NSString *) getChineseCalendarWithDate:(NSDate *)date{
     
     NSInteger dayOfWeek  =[self getDateInfo:date];
+    
 
     NSDateComponents *localeComp = [self.chineseCalendar components:NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay fromDate:date];
     
@@ -227,7 +230,6 @@
 -(NSString *)getChineseWeekDaysWithDate:(NSDate *)date{
     
     NSDateComponents *localeComp = [self.chineseCalendar components: NSCalendarUnitDay fromDate:date];
-    
     return [self.chineseDays objectAtIndex:localeComp.day-1];
 
 }

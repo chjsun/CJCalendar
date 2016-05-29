@@ -12,6 +12,7 @@
 
 #import "CJYearViewController.h"
 #import "CJMonthDayViewController.h"
+#import "CJSelectTimeScrollView.h"
 
 #import "CJDecisionView.h"
 
@@ -38,7 +39,7 @@
  
  */
 
-@interface CJCalendarViewController ()<ShowTimeViewDelegate, YearViewControllerDelegate, DecisionDelegate>
+@interface CJCalendarViewController ()<ShowTimeViewDelegate, YearViewControllerDelegate, DecisionDelegate, SelectTimeScrollViewDelegate>
 
 /** 记录高度 */
 @property (nonatomic, assign) CGFloat viewHeight;
@@ -46,7 +47,8 @@
 /** timeView */
 @property (nonatomic, strong) CJShowTimeView *timeView;
 /** selectController */
-@property (nonatomic, strong) CJYearViewController *yearController;
+@property (nonatomic, strong) CJSelectTimeScrollView *selectScrollView;
+
 
 @end
 
@@ -76,12 +78,13 @@
     return _timeView;
 }
 
--(CJYearViewController *)yearController{
-    if (!_yearController) {
-     _yearController = [[CJYearViewController alloc] init];
-    _yearController.delegate = self;
+-(CJSelectTimeScrollView *)selectScrollView{
+    if (!_selectScrollView) {
+        _selectScrollView = [[CJSelectTimeScrollView alloc] init];
+        _selectScrollView.delegates = self;
+        _selectScrollView.scrollEnabled = NO;
     }
-    return _yearController;
+    return _selectScrollView;
 }
 
 - (void)viewDidLoad {
@@ -92,26 +95,24 @@
     // 设置showTime
     [self setShowTimeView];
     // 设置选择板
-//    [self setSelectTime];
-    
-    
-    // test
-    [self test];
+    [self setSelectTime];
 
-    
     // 设置控制板
     [self setDecision];
     
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    
-    [self.yearController refreshControlWithCellText:self.timeView.yearText];
+    // 初始化时将控制器跳转到指定时间
+    self.selectScrollView.year = self.timeView.yearText;
+
 }
 
 // set background alpha
+// 设置背景
 -(void) setBackgroundView{
     UIView *bgView = [[UIView alloc] initWithFrame:self.view.frame];
     bgView.backgroundColor = [UIColor blackColor];
@@ -120,6 +121,7 @@
 }
 
 // ser showTimeView
+// 设置在日历上方的头部显示面板
 -(void) setShowTimeView{
     [self.timeView generateView];
     
@@ -127,22 +129,8 @@
 }
 
 // set selectView
+// 设置日历选择面板
 -(void) setSelectTime{
-    CGFloat selectWidth = self.view.bounds.size.width - 2 * CJEdgeWidth;
-    // (h - 2*edge)/2
-    CGFloat selectHeight = (self.view.bounds.size.height - 2 * CJEdgeHeight)/2;
-    CGRect selectRect = CGRectMake(CJEdgeWidth, CJEdgeHeight + self.viewHeight, selectWidth, selectHeight);
-    self.viewHeight += selectHeight;
-    
-    
-    self.yearController.view.frame = selectRect;
-    self.yearController.selectColor = CJColor(60, 45, 140);
-    
-    [self addChildViewController:self.yearController];
-    [self.view addSubview:self.yearController.view];
-}
-
--(void)test{
     
     CGFloat selectWidth = self.view.bounds.size.width - 2 * CJEdgeWidth;
     // (h - 2*edge)/2
@@ -150,12 +138,20 @@
     CGRect selectRect = CGRectMake(CJEdgeWidth, CJEdgeHeight + self.viewHeight, selectWidth, selectHeight);
     self.viewHeight += selectHeight;
     
-    CJMonthDayViewController *mon = [[CJMonthDayViewController alloc] initWithFrame:selectRect];
-    [self.view addSubview:mon.view];
-    [self addChildViewController:mon];
+    self.selectScrollView.frame = selectRect;
+    //设置scrollview的属性
+    self.selectScrollView.contentSize = CGSizeMake(selectWidth * 2, selectHeight);
+    self.selectScrollView.pagingEnabled = YES;
+    self.selectScrollView.showsHorizontalScrollIndicator = FALSE;
+    //设置所有的子控制器
+    [self.selectScrollView setUpAllControllerWithSuperControll:self];
+    
+    [self.view addSubview:self.selectScrollView];
+    
 }
 
 // set decisionView
+// 设置最后的按钮
 -(void) setDecision{
     CGFloat selectWidth = self.view.bounds.size.width - 2 * CJEdgeWidth;
     // h/8 - 11
@@ -171,23 +167,25 @@
 }
 
 
-#pragma mark - showViewDelegate
-// 月 日  代理
+#pragma mark - showViewDelegate 具体日历上方的时间显示区代理
+// 头部 月 日 -- 代理
 -(void)ShowTimeView:(CJShowTimeView *)timeView didSelectMonth:(NSString *)month day:(NSString *)day{
     NSLog(@"%@, %@", month , day);
+    [self setBoundsToScrollView:0];
 }
-// 年  代理
+// 头部 年 -- 代理
 -(void)ShowTimeView:(CJShowTimeView *)timeView didSelectYear:(NSString *)year{
-    
-    [self.yearController refreshControlWithCellText:year];
+    self.selectScrollView.year = year;
+    [self setBoundsToScrollView:1];
 }
 
-#pragma mark - yearDelegate
--(void)yearTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath cellText:(NSString *)cellText{
-    
-    self.timeView.yearText = cellText;
-    [self.timeView generateView];
-    
+-(void) setBoundsToScrollView:(CGFloat)tag{
+
+    CGFloat selectWidth = self.view.bounds.size.width - 2 * CJEdgeWidth;
+    // (h - 2*edge)/2
+    CGFloat selectHeight = (self.view.bounds.size.height - 2 * CJEdgeHeight)/2;
+    self.selectScrollView.bounds = CGRectMake(selectWidth * tag, 0, selectWidth, selectHeight);
+
 }
 
 #pragma mark - 控制板按钮
@@ -205,7 +203,4 @@
 }
 
 
--(void)dealloc{
-    NSLog(@"CJC");
-}
 @end
