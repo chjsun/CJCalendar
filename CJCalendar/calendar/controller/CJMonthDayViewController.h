@@ -10,4 +10,6 @@
 
 @interface CJMonthDayViewController : UICollectionViewController
 
+-(instancetype)initWithFrame:(CGRect)frame;
+
 @end

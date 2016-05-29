@@ -11,6 +11,7 @@
 #import "CJShowTimeView.h"
 
 #import "CJYearViewController.h"
+#import "CJMonthDayViewController.h"
 
 #import "CJDecisionView.h"
 
@@ -21,10 +22,10 @@
 
 /**
  概览：
- 总共整个控件分为四个部分  1，头部，主要显示全部时间内容，通常显示阳历对应的中国农历时间
-                       2，年月日板 主要显示年月日和控制选择年月日的视图
-                       3，选择板，用来选择年或者月日
-                       4，控制板，主要是将选择的数据返回给调用者，基本有三个按钮(今日), (取消), (确定)
+ 总共整个控件分为四个部分  1，a:头部，主要显示全部时间内容，通常显示阳历对应的中国农历时间
+                       2，b:年月日板 主要显示年月日和控制选择年月日的视图
+                       3，c:选择板，用来选择年或者月日
+                       4，d:控制板，主要是将选择的数据返回给调用者，基本有三个按钮(今日), (取消), (确定)
  计算：
     注：h是需要显示的大小，一般是整个屏幕去掉自定义的edge，即h = width - 2 * CJEdgeHeight
         1: 22 p
@@ -91,10 +92,16 @@
     // 设置showTime
     [self setShowTimeView];
     // 设置选择板
-    [self setSelectTime];
+//    [self setSelectTime];
+    
+    
+    // test
+    [self test];
+
+    
     // 设置控制板
     [self setDecision];
-
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -135,6 +142,19 @@
     [self.view addSubview:self.yearController.view];
 }
 
+-(void)test{
+    
+    CGFloat selectWidth = self.view.bounds.size.width - 2 * CJEdgeWidth;
+    // (h - 2*edge)/2
+    CGFloat selectHeight = (self.view.bounds.size.height - 2 * CJEdgeHeight)/2;
+    CGRect selectRect = CGRectMake(CJEdgeWidth, CJEdgeHeight + self.viewHeight, selectWidth, selectHeight);
+    self.viewHeight += selectHeight;
+    
+    CJMonthDayViewController *mon = [[CJMonthDayViewController alloc] initWithFrame:selectRect];
+    [self.view addSubview:mon.view];
+    [self addChildViewController:mon];
+}
+
 // set decisionView
 -(void) setDecision{
     CGFloat selectWidth = self.view.bounds.size.width - 2 * CJEdgeWidth;
@@ -152,11 +172,11 @@
 
 
 #pragma mark - showViewDelegate
-// 代理月日板代理
+// 月 日  代理
 -(void)ShowTimeView:(CJShowTimeView *)timeView didSelectMonth:(NSString *)month day:(NSString *)day{
     NSLog(@"%@, %@", month , day);
 }
-// 年代理
+// 年  代理
 -(void)ShowTimeView:(CJShowTimeView *)timeView didSelectYear:(NSString *)year{
     
     [self.yearController refreshControlWithCellText:year];
@@ -184,4 +204,8 @@
     NSLog(@"%s", __func__);
 }
 
+
+-(void)dealloc{
+    NSLog(@"CJC");
+}
 @end

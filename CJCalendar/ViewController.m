@@ -9,11 +9,15 @@
 #import "ViewController.h"
 
 #import "CJCalendarViewController.h"
+#import "CJUseTime.h"
 
 @interface ViewController ()
 
 /** controller */
 @property (nonatomic, strong) CJCalendarViewController *calendarController;
+
+/** 高亮 */
+@property (nonatomic, strong) UIImageView *himageView;
 
 @end
 
@@ -26,14 +30,13 @@
     self.calendarController = [[CJCalendarViewController alloc] init];
     self.calendarController.view.frame = self.view.frame;
 
+    CJUseTime *useTime = [[CJUseTime alloc] init];
+    [useTime test];
     
-//    [self test];
-    
-}
+    }
 
 
 - (IBAction)btnClick:(id)sender {
-    
     [self presentViewController:self.calendarController animated:YES completion:nil];
 }
 
