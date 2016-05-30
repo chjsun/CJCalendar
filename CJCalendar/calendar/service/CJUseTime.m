@@ -32,6 +32,9 @@
 -(NSCalendar *)gregorianCalendar{
     if (!_gregorianCalendar) {
         _gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        [_gregorianCalendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        [_gregorianCalendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+
     }
     return _gregorianCalendar;
 }
@@ -40,6 +43,8 @@
 -(NSCalendar *)chineseCalendar{
     if (!_chineseCalendar) {
         _chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+        [_chineseCalendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        [_chineseCalendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     }
     return _chineseCalendar;
 }
@@ -208,7 +213,7 @@
     
     NSString *y_str = [self.chineseYears objectAtIndex:localeComp.year-1];
     NSString *m_str = [self.chineseMonths objectAtIndex:localeComp.month-1];
-    NSString *d_str = [self.chineseDays objectAtIndex:localeComp.day-1];
+    NSString *d_str = [self.chineseDays objectAtIndex:(localeComp.day==0? 29: localeComp.day-1)];
     NSString *dw_str = [self.chineseWeekDays objectAtIndex:dayOfWeek];
     
     return [NSString stringWithFormat:@"%@ %@%@ %@", y_str, m_str, d_str, dw_str];
@@ -230,8 +235,8 @@
 -(NSString *)getChineseWeekDaysWithDate:(NSDate *)date{
     
     NSDateComponents *localeComp = [self.chineseCalendar components: NSCalendarUnitDay fromDate:date];
-    return [self.chineseDays objectAtIndex:localeComp.day-1];
-
+    
+    return [self.chineseDays objectAtIndex:(localeComp.day==0? 29: localeComp.day-1)];
 }
 
 
