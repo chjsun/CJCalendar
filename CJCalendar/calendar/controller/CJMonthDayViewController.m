@@ -116,7 +116,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         
         //日期属性
         cell.gregoiainCalendar = dateStr;
-        cell.chineseCalendar = [self.useTime timeChineseCalendarWithDate:dateStr];
+        cell.chineseCalendar = [self.useTime timeChineseCalendarWithString:dateStr];
         
         //设置选中后
         if (cell.selectedBackgroundView == nil) {

@@ -100,17 +100,6 @@
     return _chineseWeekDays;
 }
 
-
--(void)test{
-//    NSDate * currentDate = [NSDate date];
-    
-    NSString * dateStr = @"1986-5-5";
-    NSDate *date = [self strToDate:dateStr];
-//    [self timeFewWeekInMonth:dateStr];
-    [self getChineseWeekDaysWithDate:date];
-    
-}
-
 /**
  *  根据给定字符串返回字符串代表月的天数
  *
@@ -120,12 +109,12 @@
  */
 -(NSInteger) timeNumberOfDaysInString:(NSString *)dateStr{
     NSDate *date = [self strToDate:dateStr];
-    return [self getNumberOfDaysInDate:date];
+    return [self timeNumberOfDaysInDate:date];
 }
 
 
 //获取给定日期所在月有多少天
-- (NSInteger)getNumberOfDaysInDate:(NSDate *)date
+- (NSInteger)timeNumberOfDaysInDate:(NSDate *)date
 {
     // 只要个时间给日历,就会帮你计算出来。这里的时间取当前的时间。
     NSRange range = [self.gregorianCalendar rangeOfUnit:NSCalendarUnitDay
@@ -150,13 +139,20 @@
     return comps.weekday - 1;
 }
 
-// 日期和字符串之间的转换
+// 字符串转日期
 - (NSDate *) strToDate:(NSString *)dateStr
 {
     [self.formatter setDateFormat:@"yyyy-MM-dd"]; // 年-月-日 时:分:秒
     // 这个格式可以随便定义,比如：@"yyyy,MM,dd,HH,mm,ss"
-    NSDate *date = [self.formatter dateFromString:dateStr];
-    return date;
+    return [self.formatter dateFromString:dateStr];
+}
+
+// 日期转字符串
+- (NSString *) dataToString:(NSDate *)date
+{
+    [self.formatter setDateFormat:@"yyyy-MM-dd"]; // 年-月-日 时:分:秒
+    // 这个格式可以随便定义,比如：@"yyyy,MM,dd,HH,mm,ss"
+    return [self.formatter stringFromDate:date];
 }
 
 //获得一个月“占”几个星期
@@ -164,7 +160,7 @@
     
     NSDate *date = [self strToDate:dateStr];
     //一个月多少天
-    NSInteger dayNumber = [self getNumberOfDaysInDate:date];
+    NSInteger dayNumber = [self timeNumberOfDaysInDate:date];
     
     NSInteger weekday = [self getDateInfo:date];
     
@@ -198,13 +194,13 @@
  *
  *  @return 丙寅虎年 四月廿四 星期三
  */
-- (NSString *) timeChineseCalendarWithDate:(NSString *)dateStr{
+- (NSString *) timeChineseCalendarWithString:(NSString *)dateStr{
     NSDate *date = [self strToDate:dateStr];
-    return [self getChineseCalendarWithDate:date];
+    return [self timeChineseCalendarWithDate:date];
     
 }
 // get Chinese calendar
-- (NSString *) getChineseCalendarWithDate:(NSDate *)date{
+- (NSString *) timeChineseCalendarWithDate:(NSDate *)date{
     
     NSInteger dayOfWeek  =[self getDateInfo:date];
     
@@ -226,6 +222,7 @@
  *
  *  @return 1～30
  */
+
 -(NSString *)timeChineseDaysWithDate:(NSString *)dateStr{
     NSDate *date = [self strToDate:dateStr];
     return [self getChineseWeekDaysWithDate:date];

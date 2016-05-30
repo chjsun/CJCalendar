@@ -10,8 +10,6 @@
 
 @interface CJUseTime : NSObject
 
--(void) test;
-
 /**
  *  根据给定字符串返回字符串代表月的天数
  *
@@ -19,7 +17,8 @@
  *
  *  @return 28 or 29 or 30 or 31
  */
--(NSInteger) timeNumberOfDaysInString:(NSString *)dateStr;
+-(NSInteger) timeNumberOfDaysInString:(NSString *) dateStr;
+-(NSInteger) timeNumberOfDaysInDate:(NSDate *) date;
 
 /**
  *  根据给定字字符串返回字符串代表天是星期几
@@ -52,7 +51,11 @@
  *
  *  @return 丙寅虎年 四月廿四 星期三
  */
-- (NSString *) timeChineseCalendarWithDate:(NSString *)dateStr;
+- (NSString *) timeChineseCalendarWithString:(NSString *)dateStr;
+- (NSString *) timeChineseCalendarWithDate:(NSDate *)date;
 
-
+// 字符串转日期
+- (NSDate *) strToDate:(NSString *)dateStr;
+// 日期转字符串
+- (NSString *) dataToString:(NSDate *)date;
 @end

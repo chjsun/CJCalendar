@@ -9,12 +9,10 @@
 #import "CJCalendarViewController.h"
 
 #import "CJShowTimeView.h"
-
-#import "CJYearViewController.h"
-#import "CJMonthDayViewController.h"
 #import "CJSelectTimeScrollView.h"
-
 #import "CJDecisionView.h"
+
+#import "CJUseTime.h"
 
 #define CJColor(r, g, b) ([UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1])
 
@@ -48,7 +46,8 @@
 @property (nonatomic, strong) CJShowTimeView *timeView;
 /** selectController */
 @property (nonatomic, strong) CJSelectTimeScrollView *selectScrollView;
-
+/** 操作时间 */
+@property (nonatomic, strong) CJUseTime *useTime;
 
 @end
 
@@ -58,6 +57,7 @@
 
     if (self = [super init]) {
         self.view.frame = [UIScreen mainScreen].bounds;
+        self.Date = [NSDate dateWithTimeIntervalSinceNow:0];
     }
     
     return self;
@@ -87,6 +87,13 @@
     return _selectScrollView;
 }
 
+-(CJUseTime *)useTime{
+    if (!_useTime) {
+        _useTime = [[CJUseTime alloc] init];
+    }
+    return _useTime;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -96,19 +103,17 @@
     [self setShowTimeView];
     // 设置选择板
     [self setSelectTime];
-
     // 设置控制板
     [self setDecision];
     
 }
 
-
+// 即将显示的时候，做一下初始化操作
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
     // 初始化时将控制器跳转到指定时间
     self.selectScrollView.year = self.timeView.yearText;
-
 }
 
 // set background alpha
@@ -220,5 +225,31 @@
     NSLog(@"%s", __func__);
 }
 
+#pragma mark - 本类对外的操作
+
+// 设置指定时间
+
+-(void)setDate:(NSDate *)Date{
+    _Date = Date;
+    [self setCustomDate:Date];
+}
+
+-(void)setCustomDate:(NSDate *)Date{
+    NSArray *calendar = [[self.useTime dataToString:Date] componentsSeparatedByString:@"-"];
+    
+    self.timeView.headerName = [self.useTime timeChineseCalendarWithDate:Date];
+    self.timeView.monthText = calendar[1];
+    self.timeView.dayText = calendar[2];
+    self.timeView.yearText = calendar[0];
+    [self.selectScrollView refreshControlWithYear:calendar[0] month:calendar[1] day:calendar[2]];
+    
+
+}
+// 设置指定年月日
+-(void)setYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
+    NSDate *date = [self.useTime strToDate:[NSString stringWithFormat:@"%@-%@-%@", year? year: @1970, month? month: @1970, day? day: @1970]];
+
+    self.Date = date;
+}
 
 @end

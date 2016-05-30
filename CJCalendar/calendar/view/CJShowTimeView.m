@@ -134,9 +134,9 @@
         
         self.contentBackgroundColor = CJColor(71, 55, 169);
         self.contentColor = [UIColor whiteColor];
-        self.dayText = @"05";
-        self.monthText = @"8";
-        self.yearText = @"2057";
+        self.dayText = @"1";
+        self.monthText = @"1";
+        self.yearText = @"1970";
         
         self.basicColor = CJColor(220, 220, 220);
 
@@ -347,7 +347,7 @@
 
 -(void)setMonthText:(NSString *)monthText{
     _monthText = monthText;
-    self.animMonthLabel.text = [NSString stringWithFormat:@"%@月", monthText];
+    self.animMonthLabel.text = [NSString stringWithFormat:@"%ld月", [monthText integerValue]];
 }
 
 -(void)setHeaderName:(NSString *)headerName{
