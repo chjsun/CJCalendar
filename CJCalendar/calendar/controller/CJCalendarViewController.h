@@ -24,4 +24,7 @@
 
 -(void) setYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
 
+/** 代理 */
+@property (nonatomic, assign) id<CalendarViewControllerDelegate> delegate;
+
 @end

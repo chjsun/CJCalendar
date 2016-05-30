@@ -119,9 +119,9 @@
 // set background alpha
 // 设置背景
 -(void) setBackgroundView{
+    
     UIView *bgView = [[UIView alloc] initWithFrame:self.view.frame];
-    bgView.backgroundColor = [UIColor blackColor];
-//    bgView.alpha = 0.8;
+    bgView.backgroundColor = CJColor(29, 29, 29);
     [self.view addSubview:bgView];
 }
 
@@ -214,7 +214,13 @@
 #pragma mark - 控制板按钮
 // 确定
 -(void)DecisionDidSelectAction:(CJDecisionView *)decision{
-    NSLog(@"%s", __func__);
+    if ([self.delegate respondsToSelector:@selector(CalendarViewController:didSelectActionYear:month:day:)]) {
+        // 代理传值， 将年月日信息传递给调用者
+        [self.delegate CalendarViewController:self didSelectActionYear:self.timeView.yearText month:self.timeView.monthText day:self.timeView.dayText];
+        
+        // dismiss 该控制器
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 // 取消
 -(void)DecisionDidSelectCancel:(CJDecisionView *)decision{
@@ -222,7 +228,7 @@
 }
 // 今日
 -(void)DecisionDidSelectNow:(CJDecisionView *)decision{
-    NSLog(@"%s", __func__);
+    self.Date = [NSDate dateWithTimeIntervalSinceNow:0];
 }
 
 #pragma mark - 本类对外的操作

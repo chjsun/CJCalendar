@@ -10,7 +10,10 @@
 
 #import "CJCalendarViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<CalendarViewControllerDelegate>
+
+/** 按钮 */
+@property (nonatomic, weak) UIButton *CJButton;
 
 @end
 
@@ -23,16 +26,27 @@
 
 
 - (IBAction)btnClick:(UIButton *)sender {
+    self.CJButton = sender;
     CJCalendarViewController *calendarController = [[CJCalendarViewController alloc] init];
     calendarController.view.frame = self.view.frame;
     
-
-    [calendarController setYear:@"2017" month:@"2" day:@"5"];
+    calendarController.delegate = self;
     
-    [sender setTitle:@"hahahahah" forState:UIControlStateNormal];
+    NSArray *arr = [sender.titleLabel.text componentsSeparatedByString:@"-"];
 
+    if (arr.count > 1) {
+        [calendarController setYear:arr[0] month:arr[1] day:arr[2]];
+    }
+
+    
     [self presentViewController:calendarController animated:YES completion:nil];
+
 }
 
+-(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
+    
+    [self.CJButton setTitle:[NSString stringWithFormat:@"%@-%@-%@", year, month, day] forState:UIControlStateNormal];
+
+}
 
 @end

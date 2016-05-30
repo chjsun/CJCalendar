@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Df-o4-NCC">
-                                <rect key="frame" x="36" y="40" width="240" height="128"/>
+                                <rect key="frame" x="16" y="40" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="sai-ya-LKr"/>
@@ -30,7 +30,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NIy-04-UDp">
-                                <rect key="frame" x="99" y="188" width="240" height="128"/>
+                                <rect key="frame" x="119" y="188" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="ZiX-zj-nKv"/>
@@ -55,10 +55,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1Df-o4-NCC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Anu-qW-Usp"/>
+                            <constraint firstItem="1Df-o4-NCC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Anu-qW-Usp"/>
                             <constraint firstItem="HbW-q5-Vz8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BRi-Bz-9JV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HbW-q5-Vz8" secondAttribute="bottom" constant="120" id="mPc-99-5v3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="NIy-04-UDp" secondAttribute="trailing" constant="20" id="pcd-vf-Teh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NIy-04-UDp" secondAttribute="trailing" id="pcd-vf-Teh"/>
                             <constraint firstItem="1Df-o4-NCC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="r2S-qn-q1S"/>
                             <constraint firstItem="NIy-04-UDp" firstAttribute="top" secondItem="1Df-o4-NCC" secondAttribute="bottom" constant="20" id="r8g-bc-egN"/>
                         </constraints>
