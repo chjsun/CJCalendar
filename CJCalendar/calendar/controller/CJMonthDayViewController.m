@@ -207,12 +207,13 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 
 
 -(void)refreshControlWithYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
-    //每个月的第一天
-    NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+    // 每个月的第一天
+    // (2101-1970) * 12
+    NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@", year, month, @1];
     // 获得这个月第一天是星期几
     NSInteger dayOfFirstWeek = [self.useTime timeMonthWeekDayOfFirstDay:dateStr];
     
-    NSInteger section = [year integerValue] - 1971 + [month integerValue];
+    NSInteger section = ([year integerValue] - 1970)*12 + ([month integerValue] - 1);
     NSInteger item = [day integerValue] + dayOfFirstWeek - 1;
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
