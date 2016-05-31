@@ -48,13 +48,13 @@
 
 ```
 //以下属性均有默认值
-/** HeaderColor default white 上部先是区域标题的颜色*/
+/** HeaderColor default white 上部显示区域标题的颜色*/
 @property (nonatomic, copy) UIColor *headerColor;
-/** HeaderBackgroundColor default rgb (60, 45, 140) 上部先是区域标题栏背景颜色 */
+/** HeaderBackgroundColor default rgb (60, 45, 140) 上部显示区域标题栏背景颜色 */
 @property (nonatomic, copy) UIColor *headerBackgroundColor;
-/** contentColor default white 上部先是区域内容文本颜色*/
+/** contentColor default white 上部显示区域内容文本颜色*/
 @property (nonatomic, copy) UIColor *contentColor;
-/** contentBackgroundColor default rgb (71, 55, 169) 上部先是区域内容背景颜色*/
+/** contentBackgroundColor default rgb (71, 55, 169) 上部显示区域内容背景颜色*/
 @property (nonatomic, copy) UIColor *contentBackgroundColor;
 
 ```
