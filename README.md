@@ -25,3 +25,14 @@
 ```
 -(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
 ```
+
+### 可选的方法
+#### 一 指定初始时间
+
+```
+/** 直接指定时间 */
+@property (nonatomic, strong) NSDate *Date;
+/** 传入年、月、日 ，设置时间 */
+-(void) setYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
+
+```
