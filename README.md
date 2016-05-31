@@ -33,7 +33,7 @@
 -(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
 ```
 
-### 可选的方法
+### 可选的方法/属性
 #### 一 指定初始时间
 默认不指定就是当前时间
 
