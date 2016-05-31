@@ -44,7 +44,6 @@
 -(UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = self.contentColor;
     }
     return _titleLabel;
 }
@@ -137,8 +136,6 @@
         self.dayText = @"1";
         self.monthText = @"1";
         self.yearText = @"1970";
-        
-        self.basicColor = CJColor(220, 220, 220);
 
     }
     return self;
@@ -169,7 +166,6 @@
     self.titleLabel.text = self.headerName;
     self.titleLabel.textColor = self.headerColor;
     self.titleLabel.font = [UIFont boldSystemFontOfSize:rect.size.height * CJBasicFontToHeight-4];
-//    self.titleLabel.font = [UIFont fontWithName:@ "Arial Rounded MT Bold"  size:(rect.size.height * CJBasicFontToHeight)];
 
     [self.titleLabel sizeToFit];
     self.titleLabel.center = self.headerView.center;
@@ -353,6 +349,31 @@
 -(void)setHeaderName:(NSString *)headerName{
     _headerName = headerName;
     self.titleLabel.text = headerName;
+}
+
+#pragma mark - 设置扩展属性  颜色
+
+- (void)setHeaderColor:(UIColor *)headerColor{
+    _headerColor = headerColor;
+    self.titleLabel.textColor = headerColor;
+}
+
+-(void)setHeaderBackgroundColor:(UIColor *)headerBackgroundColor{
+    _headerBackgroundColor = headerBackgroundColor;
+    self.headerView.backgroundColor = headerBackgroundColor;
+}
+
+- (void)setContentColor:(UIColor *)contentColor{
+    _contentColor = contentColor;
+    self.animMonthLabel.textColor = contentColor;
+    self.animDayLabel.textColor = contentColor;
+    self.animYearLabel.textColor = contentColor;
+}
+
+- (void)setContentBackgroundColor:(UIColor *)contentBackgroundColor{
+    _contentBackgroundColor = contentBackgroundColor;
+    self.monthAndDayView.backgroundColor = contentBackgroundColor;
+    self.yearView.backgroundColor = contentBackgroundColor;
 }
 
 @end

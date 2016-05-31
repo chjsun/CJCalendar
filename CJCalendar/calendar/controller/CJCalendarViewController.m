@@ -114,6 +114,7 @@
     
     // 初始化时将控制器跳转到指定时间
     self.selectScrollView.year = self.timeView.yearText;
+//        [self.timeView setNeedsDisplay];
 }
 
 // set background alpha
@@ -256,6 +257,31 @@
     NSDate *date = [self.useTime strToDate:[NSString stringWithFormat:@"%@-%@-%@", year? year: @1970, month? month: @1970, day? day: @1970]];
 
     self.Date = date;
+}
+
+#pragma mark - 设置扩展属性  颜色
+
+- (void)setHeaderColor:(UIColor *)headerColor{
+    _headerColor = headerColor;
+    self.timeView.headerColor = headerColor;
+}
+
+-(void)setHeaderBackgroundColor:(UIColor *)headerBackgroundColor{
+    _headerBackgroundColor = headerBackgroundColor;
+    self.timeView.headerBackgroundColor = headerBackgroundColor;
+}
+
+- (void)setContentColor:(UIColor *)contentColor{
+    _contentColor = contentColor;
+    self.timeView.contentColor = contentColor;
+
+}
+
+- (void)setContentBackgroundColor:(UIColor *)contentBackgroundColor{
+    _contentBackgroundColor = contentBackgroundColor;
+    self.timeView.contentBackgroundColor = contentBackgroundColor;
+    self.selectScrollView.selectYearColor = contentBackgroundColor;
+    self.selectScrollView.selectMonthDayColor = contentBackgroundColor;
 }
 
 @end

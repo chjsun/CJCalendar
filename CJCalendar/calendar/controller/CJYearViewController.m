@@ -20,11 +20,6 @@ static NSString * const reuseIdentifier = @"yearTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //注册
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseIdentifier];
-    
-    //
-//    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 
@@ -97,7 +92,6 @@ static NSString * const reuseIdentifier = @"yearTableViewCell";
 -(void)refreshControlWithCellText:(NSString *)year{
     NSUInteger row = [year integerValue] - 1970;
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:CGPointMake(10, row * self.view.frame.size.height/4+1)];
-//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 }

@@ -109,4 +109,14 @@
     }
 }
 
+-(void)setSelectYearColor:(UIColor *)selectYearColor{
+    _selectYearColor = selectYearColor;
+    self.yearController.selectColor = selectYearColor;
+}
+
+-(void)setSelectMonthDayColor:(UIColor *)selectMonthDayColor{
+    _selectMonthDayColor = selectMonthDayColor;
+    self.monthAndDayController.selectColor = selectMonthDayColor;
+}
+
 @end

@@ -28,6 +28,11 @@
 /** 需要设置的日 */
 @property (nonatomic, copy) NSString *day;
 
+/** 选中状态下的年的背景颜色 */
+@property (nonatomic, strong) UIColor *selectYearColor;
+/** 选中状态下的,年的背景颜色 */
+@property (nonatomic, strong) UIColor *selectMonthDayColor;
+
 // methed
 // 设置所有的控制器
 -(void) setUpAllControllerWithSuperControll:(UIViewController *)controller;

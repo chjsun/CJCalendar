@@ -18,7 +18,7 @@
 @interface CJYearViewController : UITableViewController
 
 /** 选中状态的color */
-@property (nonatomic, copy) UIColor *selectColor;
+@property (nonatomic, strong) UIColor *selectColor;
 
 // 根据时间更新tableview
 -(void) refreshControlWithCellText: (NSString *)year;
