@@ -1,4 +1,7 @@
 # CJCalendar
+
+## 这是一个可以显示农历和公历的日历控制器
+
 ![image](https://github.com/chjsun/readmeImage/blob/master/CJCalendar/modal.gif)
 
 ![image](https://github.com/chjsun/readmeImage/blob/master/CJCalendar/selecttitle.gif)
