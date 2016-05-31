@@ -44,14 +44,39 @@
 -(void) setYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
 
 ```
+#### 二 指定颜色
+
+```
+//以下属性均有默认值
+/** HeaderColor default white 头部标题的颜色*/
+@property (nonatomic, copy) UIColor *headerColor;
+/** HeaderBackgroundColor default rgb (60, 45, 140) 头部标题栏背景颜色 */
+@property (nonatomic, copy) UIColor *headerBackgroundColor;
+/** contentColor default white 头部内容文本颜色*/
+@property (nonatomic, copy) UIColor *contentColor;
+/** contentBackgroundColor default rgb (71, 55, 169) 头部内容背景颜色*/
+@property (nonatomic, copy) UIColor *contentBackgroundColor;
+
+```
+例如
+```
+    calendarController.headerBackgroundColor = [UIColor purpleColor];
+    calendarController.headerColor = [UIColor whiteColor];
+    calendarController.contentColor = [UIColor whiteColor];
+    calendarController.contentBackgroundColor = [UIColor purpleColor];
+```
+----------------------------
 
 #####目前，这个控制器还是相对简陋的，还有完善的空间
       - 控制器中的"取消"按钮只是实现了 modal的推出，
       - 还没有做缓存相关的操作
       - 目前只是在单线程中完成所有工作
-      
-      
-      
+
+-------------------
+-------------------
+-------------------
+
 学习阶段，请各位大神指点一二 (抱拳)
-持续更新中
+
+持续......
 
