@@ -31,13 +31,11 @@
     calendarController.view.frame = self.view.frame;
     
     calendarController.delegate = self;
-    
     NSArray *arr = [sender.titleLabel.text componentsSeparatedByString:@"-"];
 
     if (arr.count > 1) {
         [calendarController setYear:arr[0] month:arr[1] day:arr[2]];
     }
-
     
     [self presentViewController:calendarController animated:YES completion:nil];
 

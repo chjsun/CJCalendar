@@ -30,6 +30,7 @@
 /** contentBackgroundColor default rgb (71, 55, 169) 上部显示区域内容背景颜色*/
 @property (nonatomic, copy) UIColor *contentBackgroundColor;
 
+
 /** 直接指定时间 */
 @property (nonatomic, strong) NSDate *Date;
 
@@ -39,5 +40,7 @@
 // method
 /** 传入年、月、日. 设置时间 */
 -(void) setYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
+/** 传入半透明程度 和颜色，设置背景。 默认黑色，透明度0.8 */
+-(void) setBgAlpha:(CGFloat)alpha color:(UIColor *)bgColor;
 
 @end

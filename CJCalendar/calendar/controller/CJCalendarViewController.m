@@ -48,6 +48,8 @@
 @property (nonatomic, strong) CJSelectTimeScrollView *selectScrollView;
 /** 操作时间 */
 @property (nonatomic, strong) CJUseTime *useTime;
+/** 背景 */
+@property (nonatomic, weak) UIView *bgView;
 
 @end
 
@@ -114,15 +116,16 @@
     
     // 初始化时将控制器跳转到指定时间
     self.selectScrollView.year = self.timeView.yearText;
-//        [self.timeView setNeedsDisplay];
 }
 
 // set background alpha
 // 设置背景
 -(void) setBackgroundView{
-    
     UIView *bgView = [[UIView alloc] initWithFrame:self.view.frame];
+    self.bgView = bgView;
     bgView.backgroundColor = CJColor(29, 29, 29);
+    bgView.alpha = 0.8;
+    self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.view addSubview:bgView];
 }
 
@@ -282,6 +285,11 @@
     self.timeView.contentBackgroundColor = contentBackgroundColor;
     self.selectScrollView.selectYearColor = contentBackgroundColor;
     self.selectScrollView.selectMonthDayColor = contentBackgroundColor;
+}
+
+-(void)setBgAlpha:(CGFloat)alpha color:(UIColor *)bgColor{
+    self.bgView.alpha = alpha;
+    self.bgView.backgroundColor = bgColor;
 }
 
 @end
