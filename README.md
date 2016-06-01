@@ -33,7 +33,7 @@
 -(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day;
 ```
 
-### 可选的方法
+### 可选的方法/属性
 #### 一 指定初始时间
 默认不指定就是当前时间
 
@@ -48,13 +48,13 @@
 
 ```
 //以下属性均有默认值
-/** HeaderColor default white 头部标题的颜色*/
+/** HeaderColor default white 上部显示区域标题的颜色*/
 @property (nonatomic, copy) UIColor *headerColor;
-/** HeaderBackgroundColor default rgb (60, 45, 140) 头部标题栏背景颜色 */
+/** HeaderBackgroundColor default rgb (60, 45, 140) 上部显示区域标题栏背景颜色 */
 @property (nonatomic, copy) UIColor *headerBackgroundColor;
-/** contentColor default white 头部内容文本颜色*/
+/** contentColor default white 上部显示区域内容文本颜色*/
 @property (nonatomic, copy) UIColor *contentColor;
-/** contentBackgroundColor default rgb (71, 55, 169) 头部内容背景颜色*/
+/** contentBackgroundColor default rgb (71, 55, 169) 上部显示区域内容背景颜色*/
 @property (nonatomic, copy) UIColor *contentBackgroundColor;
 
 ```
