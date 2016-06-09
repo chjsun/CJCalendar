@@ -199,7 +199,26 @@
 #pragma mark - 选择日历面板控制器的代理
 // 年份选择
 -(void)selectTimeView:(CJSelectTimeScrollView *)timeScroll didSelectYearAtIndexPath:(NSIndexPath *)indexPath cellText:(NSString *)cellText{
+    
+    NSString *gregorainToChinese;
+    
+    // 判断是不是2月29号   初步将2/29 转换为2/28
+    BOOL is2M29D = (([self.timeView.monthText isEqualToString:@"02"] || [self.timeView.monthText isEqualToString:@"2"]) && [self.timeView.dayText isEqualToString:@"29"]);
+    
+    if (is2M29D) {
+        gregorainToChinese = [self.useTime timeChineseCalendarWithString:[NSString stringWithFormat:@"%@-%@-%li",cellText, self.timeView.monthText, [self.timeView.dayText integerValue] - 1]];
+        self.timeView.dayText = @"28";
+        
+    }else{
+        gregorainToChinese = [self.useTime timeChineseCalendarWithString:[NSString stringWithFormat:@"%@-%@-%@",cellText, self.timeView.monthText, self.timeView.dayText]];
+    }
+    
+    
+    self.timeView.headerName = gregorainToChinese;
     self.timeView.yearText = cellText;
+    NSLog(@"%@", gregorainToChinese);
+    
+    
 }
 
 // 月份选择
