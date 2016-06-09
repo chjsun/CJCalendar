@@ -65,6 +65,12 @@
     calendarController.contentColor = [UIColor whiteColor];
     calendarController.contentBackgroundColor = [UIColor purpleColor];
 ```
+#### 三 制定背景色和透明度
+默认透明度0.8 黑色 (ios8+)
+```
+-(void) setBgAlpha:(CGFloat)alpha color:(UIColor *)bgColor;
+```
+
 ----------------------------
 
 #####目前，这个控制器还是相对简陋的，还有完善的空间
