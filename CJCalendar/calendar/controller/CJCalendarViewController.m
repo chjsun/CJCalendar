@@ -213,11 +213,8 @@
         gregorainToChinese = [self.useTime timeChineseCalendarWithString:[NSString stringWithFormat:@"%@-%@-%@",cellText, self.timeView.monthText, self.timeView.dayText]];
     }
     
-    
     self.timeView.headerName = gregorainToChinese;
     self.timeView.yearText = cellText;
-    NSLog(@"%@", gregorainToChinese);
-    
     
 }
 
