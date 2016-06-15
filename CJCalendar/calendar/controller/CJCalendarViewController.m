@@ -126,7 +126,11 @@
     self.bgView = bgView;
     bgView.backgroundColor = CJColor(29, 29, 29);
     bgView.alpha = 0.8;
-    self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
+        self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+    }else{
+        self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    }
     [self.view addSubview:bgView];
 }
 
