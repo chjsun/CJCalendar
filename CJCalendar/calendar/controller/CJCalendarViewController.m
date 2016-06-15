@@ -59,7 +59,8 @@
 
     if (self = [super init]) {
         self.view.frame = [UIScreen mainScreen].bounds;
-        self.Date = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSTimeZone *zone = [NSTimeZone systemTimeZone];
+        self.Date = [NSDate dateWithTimeIntervalSinceNow:zone.secondsFromGMT];
     }
     
     return self;
