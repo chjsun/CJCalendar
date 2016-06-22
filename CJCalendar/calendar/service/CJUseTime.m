@@ -29,6 +29,22 @@
 
 @implementation CJUseTime
 
+
++ (CJUseTime *)sharedInstance {
+    
+    static CJUseTime * _sharedInstance = nil;
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        
+        _sharedInstance = [[CJUseTime alloc] init];
+    });
+    
+    return _sharedInstance;
+}
+
+
 -(NSCalendar *)gregorianCalendar{
     if (!_gregorianCalendar) {
         _gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];

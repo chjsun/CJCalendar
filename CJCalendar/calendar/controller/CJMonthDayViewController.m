@@ -35,7 +35,8 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 // 懒加载
 -(CJUseTime *)useTime{
     if (!_useTime) {
-        _useTime = [[CJUseTime alloc] init];
+//        _useTime = [[CJUseTime alloc] init];
+        _useTime = [CJUseTime sharedInstance];
     }
     return _useTime;
 }

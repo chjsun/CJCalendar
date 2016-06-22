@@ -10,6 +10,8 @@
 
 @interface CJUseTime : NSObject
 
+
++ (CJUseTime *)sharedInstance;
 /**
  *  根据给定字符串返回字符串代表月的天数
  *
