@@ -29,10 +29,19 @@
 
 @implementation CJUseTime
 
+static CJUseTime * _sharedInstance = nil;
+
++(instancetype)allocWithZone:(struct _NSZone *)zone{
+    if (!_sharedInstance) {
+        _sharedInstance = [super allocWithZone:zone];
+        
+        return _sharedInstance;
+    }
+    
+    return nil;
+}
 
 + (CJUseTime *)sharedInstance {
-    
-    static CJUseTime * _sharedInstance = nil;
     
     static dispatch_once_t onceToken;
     
