@@ -125,6 +125,7 @@
 -(void) setBackgroundView{
     UIView *bgView = [[UIView alloc] initWithFrame:self.view.frame];
     self.bgView = bgView;
+    // 默认颜色及透明度
     bgView.backgroundColor = CJColor(29, 29, 29);
     bgView.alpha = 0.8;
     if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
