@@ -42,7 +42,7 @@ static CJUseTime * _sharedInstance = nil;
 }
 
 + (CJUseTime *)sharedInstance {
-    
+    // 单例模式
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
