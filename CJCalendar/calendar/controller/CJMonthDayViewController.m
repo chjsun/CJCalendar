@@ -185,7 +185,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 }
 
 -(NSString *)getDateStrForSection:(NSInteger)section day:(NSInteger)day{
-    return [NSString stringWithFormat:@"%d-%d-%ld", section/12 + 1970, section%12 + 1, (long)day];
+    return [NSString stringWithFormat:@"%d-%d-%d", section/12 + 1970, section%12 + 1, day];
 }
 
 
