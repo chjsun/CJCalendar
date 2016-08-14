@@ -213,7 +213,7 @@
     BOOL is2M29D = (([self.timeView.monthText isEqualToString:@"02"] || [self.timeView.monthText isEqualToString:@"2"]) && [self.timeView.dayText isEqualToString:@"29"]);
     
     if (is2M29D) {
-        gregorainToChinese = [self.useTime timeChineseCalendarWithString:[NSString stringWithFormat:@"%@-%@-%li",cellText, self.timeView.monthText, [self.timeView.dayText integerValue] - 1]];
+        gregorainToChinese = [self.useTime timeChineseCalendarWithString:[NSString stringWithFormat:@"%@-%@-%li",cellText, self.timeView.monthText, (long)[self.timeView.dayText integerValue] - 1]];
         self.timeView.dayText = @"28";
         
     }else{

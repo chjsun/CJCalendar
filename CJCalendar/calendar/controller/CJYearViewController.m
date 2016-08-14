@@ -65,7 +65,7 @@ static NSString * const reuseIdentifier = @"yearTableViewCell";
         cell.selectedBackgroundView = selectBgView;
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1970];
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1970];
     cell.textLabel.font = [UIFont systemFontOfSize:22];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
