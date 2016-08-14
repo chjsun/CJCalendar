@@ -109,7 +109,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         cell.hidden = NO;
         NSInteger gregoiain = indexPath.item - firstCorner+1;
         //阳历
-        cell.gregoiainDay = [NSString stringWithFormat:@"%ld", gregoiain];
+        cell.gregoiainDay = [NSString stringWithFormat:@"%ld", (long)gregoiain];
         
         //农历
         NSString *dateStr = [self getDateStrForSection:indexPath.section day:gregoiain];
