@@ -338,12 +338,12 @@
 
 -(void)setDayText:(NSString *)dayText{
     _dayText = dayText;
-    self.animDayLabel.text = [NSString stringWithFormat:@"%.2ld", [dayText integerValue]];
+    self.animDayLabel.text = [NSString stringWithFormat:@"%.2ld", (long)[dayText integerValue]];
 }
 
 -(void)setMonthText:(NSString *)monthText{
     _monthText = monthText;
-    self.animMonthLabel.text = [NSString stringWithFormat:@"%ld月", [monthText integerValue]];
+    self.animMonthLabel.text = [NSString stringWithFormat:@"%ld月", (long)[monthText integerValue]];
 }
 
 -(void)setHeaderName:(NSString *)headerName{
