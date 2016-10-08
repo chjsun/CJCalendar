@@ -81,8 +81,8 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //每个月的第一天
-    NSString *strYear = [NSString stringWithFormat:@"%ld", (long)(section / 12 + 1970)];
-    NSString *strMonth = [NSString stringWithFormat:@"%ld", (long)(section % 12 + 1)];
+    NSString *strYear = [NSString stringWithFormat:@"%ld", (section / 12 + 1970)];
+    NSString *strMonth = [NSString stringWithFormat:@"%ld", (section % 12 + 1)];
     NSString *dateStr = [NSString stringWithFormat:@"%@-%@-01", strYear, strMonth];
     
     return [self.useTime timeFewWeekInMonth:dateStr] * 7;
@@ -109,7 +109,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
         cell.hidden = NO;
         NSInteger gregoiain = indexPath.item - firstCorner+1;
         //阳历
-        cell.gregoiainDay = [NSString stringWithFormat:@"%ld", (long)gregoiain];
+        cell.gregoiainDay = [NSString stringWithFormat:@"%ld", gregoiain];
         
         //农历
         NSString *dateStr = [self getDateStrForSection:indexPath.section day:gregoiain];
@@ -168,7 +168,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
             
         }
         //设置属性
-        label.text = [NSString stringWithFormat:@"%ld年 %ld", (long)(indexPath.section/12 + 1970), (long)(indexPath.section%12 + 1)];
+        label.text = [NSString stringWithFormat:@"%ld年 %ld", (indexPath.section/12 + 1970), (indexPath.section%12 + 1)];
             
         [label sizeToFit];
         
@@ -185,7 +185,7 @@ static NSString * const reuseHeader = @"monthDayViewHeader";
 }
 
 -(NSString *)getDateStrForSection:(NSInteger)section day:(NSInteger)day{
-    return [NSString stringWithFormat:@"%ld-%ld-%ld", (long)(section/12 + 1970), (long)(section%12 + 1), (long)day];
+    return [NSString stringWithFormat:@"%ld-%ld-%ld", (section/12 + 1970), (section%12 + 1), (long)day];
 }
 
 

@@ -20,6 +20,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 -(void)setGregoiainDay:(NSString *)gregoiainDay{
