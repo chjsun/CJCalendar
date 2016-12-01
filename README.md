@@ -17,8 +17,8 @@
 初始化控制器，代理监听，设置大小
 ```
   CJCalendarViewController *calendarController = [[CJCalendarViewController alloc] init];
-  calendarController.view.frame = self.view.frame;
-  calendarController.delegate = self;
+  calendarController.view.frame = self.view.frame;// 显示底层controller
+  calendarController.delegate = self;
 
 ```
 #### 二 添加控制器
@@ -71,17 +71,8 @@
 -(void) setBgAlpha:(CGFloat)alpha color:(UIColor *)bgColor;
 ```
 
-----------------------------
-
-#####目前，这个控制器还是相对简陋的，还有完善的空间
-      - 控制器中的"取消"按钮只是实现了 modal的推出，
-      - 还没有做缓存相关的操作
-      - 目前只是在单线程中完成所有工作
-
+-------------------
 -------------------
 -------------------
 
-学习阶段，请各位大神指点一二 (抱拳)
-
-持续......
 
