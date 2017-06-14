@@ -252,7 +252,6 @@
 				TargetAttributes = {
 					940BFB1A1CF29FB3000BF56F = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 9852S7GL84;
 					};
 					940BFB331CF29FB4000BF56F = {
 						CreatedOnToolsVersion = 7.2.1;

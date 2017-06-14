@@ -255,7 +255,7 @@
 }
 // 今日
 -(void)DecisionDidSelectNow:(CJDecisionView *)decision{
-    self.Date = [NSDate dateWithTimeIntervalSinceNow:0];
+    self.Date = [NSDate dateWithTimeIntervalSinceNow:[NSTimeZone systemTimeZone].secondsFromGMT];
 }
 
 #pragma mark - 本类对外的操作
